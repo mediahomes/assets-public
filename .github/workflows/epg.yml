@@ -28,7 +28,7 @@ jobs:
       - name: Run py-epg-grabber
         run: >
           cd epg &&
-          py-epg-cli local -f input.json -o tv.xml -d 1 -w 10 &&
+          py-epg-cli local -f input.json -o tv.xml -d 7 -w 10 &&
           gzip -f tv.xml
       
       - name: Commit & push changes
