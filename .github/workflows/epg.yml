@@ -24,7 +24,10 @@ jobs:
         run: pip install git+https://github.com/akmalharith/epg-grabber.git@v0.4.0
       
       - name: Run py-epg-grabber
-        run: cd epg && py-epg-cli local -f input.json -o tv.xml -d 1 -w 10 && gzip -f tv.xml
+        run: >
+          cd epg &&
+          py-epg-cli local -f input.json -o tv.xml -d 1 -w 10 &&
+          gzip -f tv.xml
       
       - name: Commit & push changes
         uses: actions-js/push@master
