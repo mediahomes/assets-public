@@ -2,6 +2,8 @@ name: JOB - Generate EPG - Every 1 day
 
 on:
   workflow_dispatch:
+  schedule:
+   - cron: '0 0 * * *'
   
 jobs:
   run_grabber:
