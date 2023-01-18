@@ -30,7 +30,7 @@ jobs:
       - name: Get youtube-dl stream url
         run: >
           channel_name=$(youtube-dl -J --flat-playlist 
-          https://youtube.com/channel/UCcZg5r9hBqK_VPUT2I7eYVw/live | 
+          https://youtube.com/channel/${{ matrix.channel_id }}/live | 
           jq -r .title | head -n1 | awk '{print tolower($1);}') &&
           curl $(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live) > $channel_name.m3u8
         working-directory: yt
