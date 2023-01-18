@@ -37,15 +37,14 @@ jobs:
           set +x
         working-directory: yt
         
-      - name: push
-        uses: github-actions-x/commit@v2.9
-        with:
-          github-token: ${{ secrets.PAT }}
-          push-branch: gh-pages
-          commit-message: 'generate youtube streams'
-          rebase: 'true' 
-      
       - name: Commit & push changes
+        uses: actions-js/push@v1.1
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: gh-pages
+          rebase: true
+      
+      - name: DISABLED - Commit & push changes 
         if: false
         uses: actions-js/push@master
         with:
