@@ -18,9 +18,9 @@ jobs:
       matrix:
         channel_id:
           - UCcZg5r9hBqK_VPUT2I7eYVw # bernama
-          - UCSrZ3UV4jOidv8ppoVuvW9Q # euronews
-          - UCzh6SMSWad2934rgoq_cNkg # suketv
-          - UCQfwfsi5VrQ8yKZ-UWmAEFg # france24
+          # - UCSrZ3UV4jOidv8ppoVuvW9Q # euronews
+          # - UCzh6SMSWad2934rgoq_cNkg # suketv
+          # - UCQfwfsi5VrQ8yKZ-UWmAEFg # france24
         include:
           - python-version: "3.9"
     steps:
@@ -46,9 +46,8 @@ jobs:
         working-directory: yt
         
       - name: Commit & push changes
-        uses: benkaiser/rebase-commit-push@master
+        uses: mediahomes/push@master
         with:
           github_token: ${{ secrets.PAT }}
           branch: ${{ env.job_branch }}
-          message: 'get-youtube-streams job'
           rebase: true
