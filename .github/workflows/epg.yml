@@ -1,4 +1,4 @@
-name: JOB - Generate EPG - Every 1 day
+name: generate-epg
 
 on:
   workflow_dispatch:
@@ -32,8 +32,8 @@ jobs:
           gzip -f tv.xml
       
       - name: Commit & push changes
-        uses: actions-js/push@master
+        uses: actions-js/push@v1.1
         with:
           github_token: ${{ secrets.PAT }}
           branch: gh-pages
-          force: true
+          rebase: true
