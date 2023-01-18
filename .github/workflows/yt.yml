@@ -4,9 +4,13 @@ on:
   workflow_dispatch:
   schedule:
   - cron: '0 */4 * * *'
+
+env:
+  job_branch: gh-pages
   
 jobs:
   run_scrape:
+    if: github.ref == 'refs/heads/gh-pages'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     strategy:
@@ -22,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: gh-pages
+          ref: ${{ env.job_branch }}
 
       - uses: actions/setup-python@v4
         with:
@@ -45,13 +49,6 @@ jobs:
         uses: benkaiser/rebase-commit-push@master
         with:
           github_token: ${{ secrets.PAT }}
-          branch: gh-pages
+          branch: ${{ env.job_branch }}
+          message: 'get-youtube-streams job'
           rebase: true
-      
-      - name: DISABLED - Commit & push changes 
-        if: false
-        uses: actions-js/push@master
-        with:
-          github_token: ${{ secrets.PAT }}
-          branch: gh-pages
-          force: true
