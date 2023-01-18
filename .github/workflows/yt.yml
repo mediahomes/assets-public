@@ -1,0 +1,35 @@
+name: JOB - Get YouTube streams
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  run_scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        include:
+          - python-version: "3.9"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Setup youtube-dl
+        run: pip install youtube-dl
+      
+      - name: Run youtube-dl
+        run: curl $(youtube-dl -g https://youtube.com/channel/UCcZg5r9hBqK_VPUT2I7eYVw/live) > ch_bnc_new.m3u8
+        working-directory: assets/yt
+      
+      - name: Commit & push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: gh-pages
+          force: true
