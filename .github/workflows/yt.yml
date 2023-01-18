@@ -2,6 +2,8 @@ name: get-youtube-streams
 
 on:
   workflow_dispatch:
+  schedule:
+  - cron: '0 */4 * * *'
   
 jobs:
   run_scrape:
@@ -35,7 +37,7 @@ jobs:
           channel_name=$(youtube-dl -J --flat-playlist 
           https://youtube.com/channel/${{ matrix.channel_id }}/live | 
           jq -r .title | head -n1 | awk '{print tolower($1);}') &&
-          curl $(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live) > $channel_name.m3u8 &&
+          curl $(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live) > ch_$channel_name.m3u8 &&
           set +x
         working-directory: yt
         
