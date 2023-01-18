@@ -9,9 +9,9 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        channel_id:
+        channels:
           - UCcZg5r9hBqK_VPUT2I7eYVw
-          - astroawani
+          - UCSrZ3UV4jOidv8ppoVuvW9Q
         include:
           - python-version: "3.9"
     steps:
