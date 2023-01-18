@@ -1,4 +1,4 @@
-name: JOB - Get YouTube streams
+name: get-youtube-streams
 
 on:
   workflow_dispatch:
@@ -11,8 +11,10 @@ jobs:
       max-parallel: 1
       matrix:
         channel_id:
-          - UCcZg5r9hBqK_VPUT2I7eYVw
-          - UCSrZ3UV4jOidv8ppoVuvW9Q
+          - UCcZg5r9hBqK_VPUT2I7eYVw # bernama
+          - UCSrZ3UV4jOidv8ppoVuvW9Q # euronews
+          - UCzh6SMSWad2934rgoq_cNkg # suketv
+          - UCQfwfsi5VrQ8yKZ-UWmAEFg # france24
         include:
           - python-version: "3.9"
     steps:
@@ -27,7 +29,7 @@ jobs:
       - name: Setup youtube-dl
         run: pip install youtube-dl
       
-      - name: Get youtube-dl stream url
+      - name: Run youtube-dl
         run: >
           set -x &&
           channel_name=$(youtube-dl -J --flat-playlist 
