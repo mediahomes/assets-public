@@ -9,7 +9,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        channels:
+        channel_id:
           - UCcZg5r9hBqK_VPUT2I7eYVw
           - UCSrZ3UV4jOidv8ppoVuvW9Q
         include:
