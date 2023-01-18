@@ -7,6 +7,7 @@ on:
 
 env:
   job_branch: gh-pages
+  youtube_dir: yt
   
 jobs:
   run_scrape:
@@ -43,7 +44,7 @@ jobs:
           jq -r .title | head -n1 | awk '{print tolower($1);}') &&
           curl $(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live) > ch_$channel_name.m3u8 &&
           set +x
-        working-directory: yt
+        working-directory: ${{ env.youtube_dir }}
         
       - name: Commit & push changes
         uses: mediahomes/push@master
