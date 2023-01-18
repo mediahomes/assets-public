@@ -42,7 +42,7 @@ jobs:
         working-directory: yt
         
       - name: Commit & push changes
-        uses: actions-js/push@v1.1
+        uses: benkaiser/rebase-commit-push@master
         with:
           github_token: ${{ secrets.PAT }}
           branch: gh-pages
