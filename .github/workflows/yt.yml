@@ -48,6 +48,7 @@ jobs:
         working-directory: ${{ env.youtube_dir }}
         
       - name: Commit & push changes
+        if: success()
         uses: mediahomes/push@master
         with:
           github_token: ${{ secrets.PAT }}
