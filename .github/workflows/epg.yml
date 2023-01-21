@@ -4,6 +4,10 @@ on:
   workflow_dispatch:
   schedule:
    - cron: '0 0 * * *'
+ 
+env:
+  job_branch: gh-pages
+  epg_dir: epg
   
 jobs:
   run_grabber:
@@ -16,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: gh-pages
+          ref: ${{ env.job_branch }}
 
       - uses: actions/setup-python@v4
         with:
@@ -26,10 +30,10 @@ jobs:
         run: pip install git+https://github.com/akmalharith/epg-grabber.git@v0.4.0
       
       - name: Run py-epg-grabber
-        run: >
-          cd epg &&
-          py-epg-cli local -f input.json -o tv.xml -d 7 -w 10 &&
+        run: |
+          py-epg-cli local -f input.json -o tv.xml -d 7 -w 10
           gzip -f tv.xml
+        working-directory: ${{ env.epg_dir }}
       
       - name: Commit & push changes
         uses: mediahomes/push@master
