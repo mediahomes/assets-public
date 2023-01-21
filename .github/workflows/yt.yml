@@ -38,6 +38,7 @@ jobs:
       
       - name: Run youtube-dl
         id: youtube_dl
+        continue-on-error: true
         run: |
           set -x 
           
