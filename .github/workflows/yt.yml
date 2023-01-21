@@ -37,6 +37,7 @@ jobs:
         run: pip install youtube-dl
       
       - name: Run youtube-dl
+        continue-on-error: true
         run: >
           set -x &&
           channel_name=$(youtube-dl -J --flat-playlist 
