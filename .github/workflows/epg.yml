@@ -32,8 +32,8 @@ jobs:
           gzip -f tv.xml
       
       - name: Commit & push changes
-        uses: actions-js/push@v1.1
+        uses: mediahomes/push@master
         with:
           github_token: ${{ secrets.PAT }}
-          branch: gh-pages
+          branch: ${{ env.job_branch }}
           rebase: true
