@@ -36,4 +36,5 @@ jobs:
         with:
           github_token: ${{ secrets.PAT }}
           branch: ${{ env.job_branch }}
+          force: true
           rebase: true
