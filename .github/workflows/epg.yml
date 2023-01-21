@@ -38,7 +38,7 @@ jobs:
       - name: Commit & push changes
         uses: mediahomes/push@master
         with:
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.job_branch }}
           force: true
           rebase: true
