@@ -38,17 +38,28 @@ jobs:
       
       - name: Run youtube-dl
         id: youtube_dl
-        run: >
-          set -x &&
-          channel_name=$(youtube-dl -J --flat-playlist 
-          https://youtube.com/channel/${{ matrix.channel_id }}/live | 
-          jq -r .title | head -n1 | awk '{print tolower($1);}') &&
-          curl $(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live) > ch_$channel_name.m3u8 &&
+        run: |
+          set -x 
+          
+          channel_name=$(youtube-dl -J --flat-playlist https://youtube.com/channel/${{ matrix.channel_id }}/live | 
+          jq -r .title |
+          head -n1 |
+          awk '{print tolower($1);}')
+
+          download_url=$(youtube-dl -g https://youtube.com/channel/${{ matrix.channel_id }}/live)
+
+          if [[ $? != 0 ]];
+          then
+              echo "Error retrieving channel live streams. Not downloading."
+              echo "Not failing the job either."
+          else
+              curl -s $download_url -o ch_$channel_name.m3u8
+          fi
+
           set +x
         working-directory: ${{ env.youtube_dir }}
         
       - name: Commit & push changes
-        if: success() && steps.youtube_dl.outcome == 'success'
         uses: mediahomes/push@master
         with:
           github_token: ${{ secrets.PAT }}
