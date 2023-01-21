@@ -37,7 +37,7 @@ jobs:
         run: pip install youtube-dl
       
       - name: Run youtube-dl
-        continue-on-error: true
+        id: youtube_dl
         run: >
           set -x &&
           channel_name=$(youtube-dl -J --flat-playlist 
@@ -48,7 +48,7 @@ jobs:
         working-directory: ${{ env.youtube_dir }}
         
       - name: Commit & push changes
-        if: success()
+        if: success() && steps.youtube_dl.outcome == 'success'
         uses: mediahomes/push@master
         with:
           github_token: ${{ secrets.PAT }}
