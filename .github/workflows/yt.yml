@@ -18,9 +18,7 @@ jobs:
       max-parallel: 1
       matrix:
         channel_id:
-          - UCcZg5r9hBqK_VPUT2I7eYVw # bernama
           - UCSrZ3UV4jOidv8ppoVuvW9Q # euronews
-          - UCzh6SMSWad2934rgoq_cNkg # suketv
           - UCQfwfsi5VrQ8yKZ-UWmAEFg # france24
         include:
           - python-version: "3.9"
