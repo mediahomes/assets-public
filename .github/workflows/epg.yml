@@ -35,7 +35,7 @@ jobs:
         working-directory: ${{ env.epg_dir }}
       
       - name: Commit & push changes
-        uses: mediahomes/push@master
+        uses: mediahomes/actions-push@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ env.job_branch }}
