@@ -30,7 +30,7 @@ jobs:
         run: pip install git+https://github.com/akmalharith/epg-grabber.git@astro-lite
       - name: Run py-epg-grabber
         run: |
-          py-epg-cli local -f input.json -o tv.xml -d 7 -w 10
+          py-epg-cli local -f input.json -o tv.xml -d 7 
           gzip -f tv.xml
         working-directory: ${{ env.epg_dir }}
       
